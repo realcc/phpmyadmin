@@ -269,6 +269,8 @@ class ExportJson extends ExportPlugin
                 if ($fieldsMeta[$i]->type === 'geometry') {
                     // export GIS types as hex
                     $record[$i] = '0x' . bin2hex($record[$i]);
+                } elseif (strpos($fields_meta[$i]->type,'blob') !== false) {
+                    $record[$i] = base64_encode($record[$i]);
                 }
                 $data[$columns[$i]] = $record[$i];
             }
